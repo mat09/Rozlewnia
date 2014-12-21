@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rozlewnia", "Rozlewnia\Rozlewnia.csproj", "{3D2941F1-88CF-40DA-96F7-C5786A5AD8D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rozlewnia WPF", "Rozlewnia WPF\Rozlewnia WPF.csproj", "{A7E10877-91D0-40AE-96D0-D49B2B8C92A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3D2941F1-88CF-40DA-96F7-C5786A5AD8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D2941F1-88CF-40DA-96F7-C5786A5AD8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D2941F1-88CF-40DA-96F7-C5786A5AD8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D2941F1-88CF-40DA-96F7-C5786A5AD8D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E10877-91D0-40AE-96D0-D49B2B8C92A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E10877-91D0-40AE-96D0-D49B2B8C92A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E10877-91D0-40AE-96D0-D49B2B8C92A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E10877-91D0-40AE-96D0-D49B2B8C92A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

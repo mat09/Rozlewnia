@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Security.Cryptography;
+using MySql.Data.MySqlClient;
 
-
-namespace Rozlewnia
+namespace Rozlewnia_WPF
 {
+
     //   Pattern:Singleton
     class DataBase
     {
@@ -26,6 +35,7 @@ namespace Rozlewnia
             strCon.Password = "hasloRozlewnia";
             strCon.Database = "rozlewnia";
             sqlCon = new MySqlConnection(strCon.ToString());
+            connect();
         }
 
         static public DataBase Instance
@@ -44,7 +54,7 @@ namespace Rozlewnia
 
             try
             {
-                sqlCon.Open();
+                    sqlCon.Open();
             }
             catch (MySqlException ex)
             {
@@ -68,7 +78,15 @@ namespace Rozlewnia
         private MySqlDataReader query(String query)
         {
             MySqlCommand cmd = new MySqlCommand(query, sqlCon);
-            return cmd.ExecuteReader();
+            MySqlDataReader resu=null;
+            try 
+            {
+                resu = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex){
+                Console.WriteLine("Error:" + ex.ToString());
+            }
+            return resu;
         }
 
 
@@ -79,16 +97,7 @@ namespace Rozlewnia
          *  2 - stockman storage
          *  3 - stockman booting
          */
-        public int login(String login, String pass)
-        {
-            MySqlDataReader result = query("SELECT who FROM USERS WHERE login='" + login + "' and password='" + pass + "'");
-            int r = 0;
-            if (result.Read())
-                r = result.GetInt16(0);
-            return r;
-
-        }
-
+        
         public Iterator<Bootle> InitBootle() // DONE
         {
             MySqlDataReader result = query("SELECT * FROM BOOTLE;");
@@ -125,13 +134,57 @@ namespace Rozlewnia
             return list;
         }
 
+        public Dictionary<String, object> login(String login, String pass)
+        {
+            MySqlDataReader result = query("SELECT * FROM USERS WHERE login='" + login + "' and password='" + pass + "'");
+            Dictionary<String, object> dict = new Dictionary<String, object>();
+            dict.Add("who", 0);
+
+            if (result.Read())
+            {
+                dict.Add("id_user", result.GetInt16(0));
+                dict["who"] = result.GetInt16(1);
+                dict.Add("login", result.GetString(2));
+                dict.Add("name", result.GetString(3));
+                dict.Add("surname", result.GetString(4));
+            }
+            result.Close();
+            return dict;
+
+        }
+        internal void insertSession(int  id_user)
+        {
+            MySqlDataReader result = query("SELECT id_session FROM SESSION WHERE id_user=" + id_user+" AND logout is NULL");
+            Boolean flaga = true;
+            while (result.Read())
+            {
+                if(flaga)
+                {
+                    flaga= false;
+                    int id_session = result.GetInt16(0);
+                    result.Close();
+                    query("UPDATE SESSION  SET logout=current_timestamp() WHERE id_session=" + id_session);
+                }
+                else 
+                {
+                    // tzn ze istnieja niezamkniete sesje uzytkownika 
+                    // metoda ktora zamyka niezakmniete sesje uzytkownika
+                }
+                
+            }
+            if (flaga)
+            {
+                result.Close();
+                query("INSERT INTO SESSION VALUES (NULL,"+id_user+",login=current_timestamp() , NULL);");
+            }
+
+        }
     }
 
     class Transporter
     {
         public Transporter() { }
     }
-
     class Client
     {
         private String name;
@@ -143,7 +196,6 @@ namespace Rozlewnia
         public Client() { }
 
     }
-
     //    Pattern::  Iterator
     class Iterator<X> where X : class, new()
     {
@@ -212,8 +264,6 @@ namespace Rozlewnia
         }
 
     }
-
-
     class Bootle
     {
         private int id_bootle;
@@ -229,56 +279,68 @@ namespace Rozlewnia
         }
 
     }
-
     //  Pattern : Singleton
     class User
     {
 
         private Boolean interfaceLock = false;
+        private Dictionary<String, object> data;
 
-        static private User user;
+        static private User instance;
         static private Boolean logIN = false;
         static private int who;
+        
 
-        public User User
+        static public User Instance
         {
             get
             {
-                if (user == null && logIN)
+                if (instance == null )
                 {
-                    switch (who)
+                    if (logIN)
                     {
-                        case 1: user = new Admin(); break;
-                        case 2: user = new StockmanStorage(); break;
-                        case 3: user = new StockmanBooting(); break;
+                        switch (who)
+                        {
+                            case 1: instance = new Admin(); break;
+                            case 2: instance = new StockmanStorage(); break;
+                            case 3: instance = new StockmanBooting(); break;
+                            default: break;
+                        }
                     }
+                    else
+                        instance = new User();
                 }
-                return user;
+                return instance;
             }
         }
 
 
-        static public void login(String login, String password)
+        public void login(String login, String password)
         {
-            DataBase.Instance.connect();
-            who = DataBase.Instance.login(login, password);
-            if (who != 0)
+            logout();
+            data = DataBase.Instance.login(login, password);
+            if ( Convert.ToInt16(data["who"]) != 0)
             {
                 logIN = true;
-                // zapisanie do tabeli sesja 
+                who = Convert.ToInt16(data["who"]);
+                DataBase.Instance.insertSession(Convert.ToInt16(data["id_user"]));
             }
         }
-        static public void logout()
+        public void logout()
         {
             if (logIN)
             {
                 logIN = false;
                 who = 0;
-                user = null;
-                //zapis do tableli sesja
+                instance = null;
+                DataBase.Instance.insertSession(Convert.ToInt16(data["id_user"]));
+                data = null;
             }
         }
-
+        public int tellMeWho()
+        {
+            return who;  
+        }
         public void interfaceBlock() { }
 
 
@@ -341,19 +403,14 @@ namespace Rozlewnia
 
     }
 
-
-
-
-
-    class Program
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class StartWindow : Window
     {
-        static void Main(string[] args)
+        public StartWindow()
         {
-            User user = new User();
-            user.login("admin", "haslo");
-            Console.ReadLine();
+            InitializeComponent();
         }
     }
-
 }
-
