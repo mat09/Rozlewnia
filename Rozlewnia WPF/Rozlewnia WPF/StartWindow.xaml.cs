@@ -363,46 +363,6 @@ namespace Rozlewnia_WPF
 
 
 
-
-
-    class MENU
-    {
-        private int what;
-        private int i;
-
-        public MENU()
-        {
-            i = 0;
-        }
-
-        public void show()
-        {
-            Console.Clear();
-            Console.WriteLine("===== MENU ====" + i + "==\n BUTLE [1]\nKoniec [0]\n");
-            what = Convert.ToInt16(Console.ReadLine());
-            i++;
-            switch (what)
-            {
-                case 0: break;
-                case 1: showButle(); break;
-                default: show(); break;
-            }
-        }
-
-        public void showButle()
-        {
-            Console.Clear();
-            Console.WriteLine("======= BUTLE ======\n[1] Wyswietl Butle\n[2] Dodaj Butle\n[0] Wstecz");
-            what = Convert.ToInt16(Console.ReadLine());
-            switch (what)
-            {
-                case 1: break;
-                case 0: show(); break;
-            }
-        }
-
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -412,5 +372,22 @@ namespace Rozlewnia_WPF
         {
             InitializeComponent();
         }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if( loginBox.Text.Length==0 || passwordBox.Password.Length==0 )
+            {
+                msg.Content = "Uzupełnij wszystkie pola";    
+                msg.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("login to :" + loginBox.Text + "   haslo:" + passwordBox.Password);
+            }
+        }
+
+
+
+
     }
 }

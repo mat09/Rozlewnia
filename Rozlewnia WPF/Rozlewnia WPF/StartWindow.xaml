@@ -9,9 +9,10 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <StackPanel Margin="100" Grid.ColumnSpan="2" >
+        <StackPanel Margin="100,100,100,68" >
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -21,10 +22,11 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="Login" Grid.Row="0" Grid.Column="0"></Label>
                 <Label Content="Hasło" Grid.Row="1" Grid.Column="0"></Label>
-                <TextBox Name="login" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
-                <TextBox Name="password" Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
+                <TextBox Name="loginBox" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
+                <PasswordBox Name="passwordBox" Grid.Row="1" Grid.Column="1" Margin="5"></PasswordBox>
+                <Label Name="msg"  Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center"></Label>
             </Grid>
-            <Button Content="Zaloguj" Margin="111,5,116,5"></Button>
+            <Button Name="loginButton" Content="Zaloguj" Margin="111,5,116,5" Click="loginButton_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,0 +1,25 @@
+CREATE TABLE SESSION (id_session int(6) NOT NULL auto_increment , id_user int(6), login datetime, logout datetime, PRIMARY KEY (id_session)  , UNIQUE (id_session) , FOREIGN KEY id_user_fk(id_user) REFERENCES USERS(id_user) ) ENGINE = INNODB;
+
+CREATE TABLE USERS  ( id_user int(6) NOT NULL auto_increment , who int(1) , login varchar(15) NOT NULL, password varchar(32) NOT NULL,  , name varchar(15) NOT NULL, surname varchar(32) NOT NULL, PRIMARY KEY (id_user) , UNIQUE (id_user) ) ENGINE=INNODB ;
+CREATE TABLE BOOTLE ( id_bootle int(6) NOT NULL auto_increment , id_client int(6) DEFAULT NULL , id_trans int(6) DEFAULT NULL , PRIMARY KEY (id_bootle) , UNIQUE (id_bootle) , FOREIGN KEY (id_client) REFERENCES CLIENT(id_client) ON DELETE CASCADE , FOREIGN KEY (id_trans) REFERENCES
+CREATE TABLE CLIENT ( id_client int(6) NOT NULL auto_increment , id_contact int(6) NOT NULL, name varchar(15) NOT NULL, surname varchar(32) NOT NULL ,FOREIGN KEY (id_contact) REFERENCES CONTACT ( id_contact) ON DELETE SET NULL , PRIMARY KEY (id_client) , UNIQUE (id_contact) ) ENGINE = INNODB ; 
+CREATE TABLE CONTACT ( id_contact int(6) NOT_NULL auto_increment ,city varchar(32) NOT NULL, state varchar(32) NOT NULL,house_number int(4) NOT NULL , flat_number int(4) DEFAULT NULL , post_code varchar(6) NOT NULL, phone_number varchar(9) NOT NULL ,PRIMARY KEY (id_contact), UNIQUE (id_contact) ) ENGINE = INNODB ;
+CREATE TABLE TRANSORTER ( id_transporter int(6) NOT NULL auto_increment , name varchar(32) NOT NULL , id_contact int(6) NOT NULL, PRIMARY KEY (id_transorter) , UNIQUE (id_transporter) , FOREIGN KEY id_contact REFERENCES CONTACT ( id_contact ) ON DELETE SET NULL ) ENGINE=INNODB;
+CREATE TABLE TRANSPORT (id_tran int(6) NOT NULL auto_increment , id_transporter int(6) NOT NULL ,type int(1) NOT NULL , data_start date DEFAULT NULL, data_end date DEFAULT NULL, PRIMARY KEY (id_trans) , UNIQUE (id_trans) , FOREIGN KEY id_transporter REFERENCES TRANSPORTER(id_transporter) ) ENGINE = INNNODB;
+CREATE TABLE IN_TRANS ( id_bootle int(6) NOT NULL , id_tran int(6) NOT NULL , PRIMARY KEY (id_bootle, id_tran), FOREIGN KEY id_bootle REFERENCES BOOTLE(id_bootle) , FOREIGN KEY id_tran REFERENCES TRASPORT(id_tran) ) ENGINE = INNOBD ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
