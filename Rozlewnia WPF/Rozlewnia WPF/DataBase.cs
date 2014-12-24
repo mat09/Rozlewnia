@@ -189,6 +189,11 @@ namespace Rozlewnia_WPF
             }
 
         }
+
+        internal bool call_user(string id , int who ,string p1, string p2, string p3, string p4)
+        {
+            return static_query("CALL user(" + id + "," + who + ",'" + p1 + "','" + p2 + "','" + p3 + "','" + p4 + "')");
+        }
     }
 
 }

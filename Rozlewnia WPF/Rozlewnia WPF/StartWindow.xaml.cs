@@ -125,7 +125,9 @@ namespace Rozlewnia_WPF
     {
         public StartWindow()
         {
-            InitializeComponent();
+
+            //InitializeComponent();
+            Window wi = new StockmanStorageWindow(); wi.Show(); this.Close();
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
@@ -156,5 +158,6 @@ namespace Rozlewnia_WPF
 
         }
 
+      
     }
 }

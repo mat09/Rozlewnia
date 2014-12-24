@@ -22,13 +22,30 @@ namespace Rozlewnia_WPF
         public StockmanStorageWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             User.Instance.logout();
+            Application.Current.Shutdown();
             
         }
 
+        private void GetBootleButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addUser_Click(object sender, RoutedEventArgs e)
+        {
+            InputUserDialog dialog = new InputUserDialog(true);
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("imie:" + dialog.MyName + " who " + dialog.Who);
+            }
+
+
+        }
     }
 }

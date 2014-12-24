@@ -1,4 +1,4 @@
-CREATE TABLE SESSION (id_session int(6) NOT NULL auto_increment , id_user int(6), login datetime, logout datetime, PRIMARY KEY (id_session)  , UNIQUE (id_session) , FOREIGN KEY id_user_fk(id_user) REFERENCES USERS(id_user) ) ENGINE = INNODB;
+CREATE TABLE SESSION (id_session int(6) NOT NULL auto_increment , id_user int(6), login datetime, logout datetime, error int(1) DEFAULT 0, PRIMARY KEY (id_session)  , UNIQUE (id_session) , FOREIGN KEY id_user_fk(id_user) REFERENCES USERS(id_user) ) ENGINE = INNODB;
 
 CREATE TABLE USERS  ( id_user int(6) NOT NULL auto_increment , who int(1) , login varchar(15) NOT NULL, password varchar(32) NOT NULL,  , name varchar(15) NOT NULL, surname varchar(32) NOT NULL, PRIMARY KEY (id_user) , UNIQUE (id_user) ) ENGINE=INNODB ;
 CREATE TABLE BOOTLE ( id_bootle int(6) NOT NULL auto_increment , id_client int(6) DEFAULT NULL , id_trans int(6) DEFAULT NULL , PRIMARY KEY (id_bootle) , UNIQUE (id_bootle) , FOREIGN KEY (id_client) REFERENCES CLIENT(id_client) ON DELETE CASCADE , FOREIGN KEY (id_trans) REFERENCES

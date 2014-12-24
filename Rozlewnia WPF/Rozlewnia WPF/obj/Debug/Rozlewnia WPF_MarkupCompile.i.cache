@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\App.xaml
-1-1252319146
+3-2111074487
 
-91619838929
+13208262292
 131583153594
-StartWindow.xaml;
+InputUserDialog.xaml;StartWindow.xaml;StockmanStorageWindow.xaml;
 
-False
+True
 
