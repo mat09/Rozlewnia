@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Rozlewnia_WPF
 {
-    /// <summary>
-    /// Interaction logic for InputUserDialog.xaml
-    /// </summary>
     public partial class InputUserDialog : Window
     {
         private ConfigurationData data;
