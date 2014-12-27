@@ -75,5 +75,14 @@ namespace Rozlewnia_WPF
             showClientDialog dialog = new showClientDialog();
             dialog.Show();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            InputTransporterDialog dialog = new InputTransporterDialog(true);
+            if(dialog.ShowDialog()==true)
+            {
+                MessageBox.Show("Dodano nową firmę transportową");
+            }
+        }
     }
 }

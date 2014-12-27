@@ -224,6 +224,33 @@ namespace Rozlewnia_WPF
             result.Close();
             return ret;
         }
+        internal bool call_deleteBootle(string p)
+        {
+            System.Windows.MessageBox.Show("a:" + p);
+
+            MySqlCommand cmd = new MySqlCommand("CALL deleteBootle(" + p + ")", sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            bool ret = false;
+            if (result.Read())
+            {
+                System.Windows.MessageBox.Show("a:" + result.GetInt16(0) + "  a2:" + result.GetInt16(1));
+                if (result.GetInt16(0) == 1 && result.GetInt16(1) == 0)
+                    ret = true;
+            }
+            result.Close();
+            return ret;
+        }
+        internal int call_transporter(string id_transporter, string name, string city, string street, string house_number, string flat_number, string post_code, string phone_number)
+        {
+            //System.Windows.MessageBox.Show("CALL client(" + id_client + ",'" + name + "','" + surname + "','" + city + "','" + street + "'," + house_number + "," + flat_number + ",'" + post_code + "','" + phone_number + "')");
+            MySqlCommand cmd = new MySqlCommand("CALL transporter(" + id_transporter + ",'" + name + "','" + city + "','" + street + "','" + house_number + "','" + flat_number + "','" + post_code + "','" + phone_number + "')", sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            int id = 0;
+            if (result.Read())
+                id = result.GetInt16(0);
+            result.Close();
+            return id;
+        }
 
         public List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
         {
@@ -293,21 +320,6 @@ namespace Rozlewnia_WPF
             return list;
         }
 
-        internal bool call_deleteBootle(string p)
-        {
-            System.Windows.MessageBox.Show("a:"+p);
-                
-            MySqlCommand cmd = new MySqlCommand("CALL deleteBootle(" + p + ")", sqlCon);
-            MySqlDataReader result = cmd.ExecuteReader();
-            bool ret = false;
-            if (result.Read())
-            {
-                System.Windows.MessageBox.Show("a:" + result.GetInt16(0) + "  a2:" + result.GetInt16(1));
-                if (result.GetInt16(0) == 1 && result.GetInt16(1) == 0)
-                    ret = true;
-            }
-            result.Close();
-            return ret;
-        }
+      
     }
 }
