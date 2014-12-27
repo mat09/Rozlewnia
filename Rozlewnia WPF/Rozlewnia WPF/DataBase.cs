@@ -72,12 +72,13 @@ namespace Rozlewnia_WPF
             }
         }
 
-       private bool static_query(String query)
+        private bool static_query(String query)
         {
             MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             try
             {
                 cmd.ExecuteNonQuery();
+                   
             }
             catch (MySqlException ex)
             {
@@ -194,6 +195,119 @@ namespace Rozlewnia_WPF
         {
             return static_query("CALL user(" + id + "," + who + ",'" + p1 + "','" + p2 + "','" + p3 + "','" + p4 + "')");
         }
-    }
+        internal int  call_client(  string id_client ,string name,string surname, string city,  string street,string house_number,string flat_number,string post_code , string phone_number)
+        {
+            //System.Windows.MessageBox.Show("CALL client(" + id_client + ",'" + name + "','" + surname + "','" + city + "','" + street + "'," + house_number + "," + flat_number + ",'" + post_code + "','" + phone_number + "')");
+            MySqlCommand cmd = new MySqlCommand("CALL client(" + id_client + ",'" + name + "','" + surname + "','" + city + "','" + street + "','" + house_number + "','" + flat_number + "','" + post_code + "','" + phone_number + "')", sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            int id = 0;
+            if (result.Read())
+                id = result.GetInt16(0);
+            result.Close();
+            return id; 
+        }
+        internal bool call_attachBootle(String ID, int id_client)
+        {
+            return static_query("CALL attachBootle("+id_client+","+ID+")");
+        }
+        internal bool call_statusBootle(string ID, int status)
+        {
+            MySqlCommand cmd = new MySqlCommand("CALL statusBootle(" + ID + "," + status + ")", sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            bool ret = false;
+            if (result.Read())
+            {
+                System.Windows.MessageBox.Show("a:" + result.GetInt16(0) + "  a2:" + result.GetInt16(1));
+                if (result.GetInt16(0) == 1 && result.GetInt16(1)==1 )
+                    ret=true;
+            }
+            result.Close();
+            return ret;
+        }
 
+        public List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
+        {
+            List <searchBootleClass> list = new List<searchBootleClass>();
+            String query = "SELECT ID , name ,surname FROM BOOTLE, CLIENT WHERE client.id_client = bootle.id_client ";
+            if (name!="" && name!=null) query += " AND client.name='" + name+"'";
+            if (surname != "" && surname!=null) query += " AND client.surname='" + surname + "'";
+            if (ID != "" && ID!=null) query += " AND bootle.ID=" + ID;
+            if (status!=-1) query+= " AND bootle.status=" + status;
+            
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            while (result.Read())
+            {
+                list.Add(new searchBootleClass() { ID = result.GetInt32(0), Name = result.GetString(1), Surname = result.GetString(2) });
+            }
+            result.Close();
+            return list; 
+        }
+        internal List<Client> showClient(String name,String surname)
+        {
+            List<Client> list = new List<Client>();
+            String query = "SELECT client.id_client , name ,surname , state , house_number , flat_number , city , post_code , phone_number FROM CONTACT, CLIENT WHERE client.id_contact = contact.id_contact ";
+            if (name != "" && name != null) query += " AND client.name='" + name + "'";
+            if (surname != "" && surname != null) query += " AND client.surname='" + surname + "'";
+            
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            while (result.Read())
+            {
+                
+                    list.Add(new Client()
+                    {
+                        Id_client = result.GetString(0),
+                        NName = result.GetString(1),
+                        Surname = result.GetString(2),
+                        State = result.GetString(3),
+                        House_number = result.GetString(4),
+                        Flat_number = result.GetString(5),
+                        City = result.GetString(6),
+                        Post_code = result.GetString(7),
+                        Phone_number = result.GetString(8)
+                    }
+                    );
+            }
+            result.Close();
+            return list;
+        }
+        internal List<editBootleClass> editBootle(string ID)
+        {
+            List<editBootleClass> list = new List<editBootleClass>();
+            String query = "SELECT ID , status FROM BOOTLE WHERE id_client ="+ID;
+            
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            while (result.Read())
+            {
+
+                list.Add(new editBootleClass()
+                {
+                    Status = result.GetString(1),
+                    ID = result.GetString(0)
+                }
+                );
+            }
+            result.Close();
+            return list;
+        }
+
+        internal bool call_deleteBootle(string p)
+        {
+            System.Windows.MessageBox.Show("a:"+p);
+                
+            MySqlCommand cmd = new MySqlCommand("CALL deleteBootle(" + p + ")", sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            bool ret = false;
+            if (result.Read())
+            {
+                System.Windows.MessageBox.Show("a:" + result.GetInt16(0) + "  a2:" + result.GetInt16(1));
+                if (result.GetInt16(0) == 1 && result.GetInt16(1) == 0)
+                    ret = true;
+            }
+            result.Close();
+            return ret;
+        }
+    }
 }

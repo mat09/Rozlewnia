@@ -16,6 +16,7 @@
     </Window.Resources>
 
     <Grid Margin="10">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -32,28 +33,28 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Imię" Grid.Row="0" Grid.Column="0" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="name"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NName}"></TextBox>
         <Label Content="Nazwisko" Grid.Row="1" Grid.Column="0" Margin="5"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Name="surname"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Surname}"></TextBox>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
             <Label Content="Ulica" Margin="1,5"/>
-            <TextBox MinWidth="120" Margin="1,5" Name="street"></TextBox>
+            <TextBox MinWidth="120" Margin="1,5" Text="{Binding State}"></TextBox>
             <Label Content="nr:" Margin="1,5"></Label>
-            <TextBox MinWidth="25" Margin="1,5" Name="house_number"></TextBox>
+            <TextBox MinWidth="25" Margin="1,5" Text="{Binding House_number}"></TextBox>
             <Label Content="/"  Margin="1,5"/>
-            <TextBox MinWidth="25" Margin="1,5" Name="flat_number"></TextBox>
+            <TextBox MinWidth="25" Margin="1,5" Text="{Binding Flat_number}"></TextBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Label Content="Kod Pocztowy" Margin="1,5"></Label>
-            <TextBox MinWidth="22" Margin="1,5" MaxLength="2" Name="post_code_1"></TextBox>
+            <TextBox MinWidth="22" Margin="1,5" MaxLength="2" Text="{Binding Post_code1}"></TextBox>
             <Label Content="-" Margin="1,5"></Label>
-            <TextBox MinWidth="33" Margin="1,5"  Name="post_code_2" MaxLength="3"></TextBox>
+            <TextBox MinWidth="33" Margin="1,5"  Text="{Binding Post_code2}" MaxLength="3"></TextBox>
         </StackPanel>
         <Label Content="Miasto" Margin="5" Grid.Column="0" Grid.Row="4"></Label>
-        <TextBox Name="city" Grid.Row="4" Grid.Column="1"></TextBox>
+        <TextBox Text="{Binding City}" Grid.Row="4" Grid.Column="1"></TextBox>
         <Label Content="Telefon" Margin="5" Grid.Row="5" Grid.Column="0"></Label>
-        <TextBox MaxLength="9" Grid.Row="5" Grid.Column="1" Name="phone"></TextBox>
-        <Label Visibility="Hidden" x:Name="msg" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0.4"/>
+        <TextBox MaxLength="9" Grid.Row="5" Grid.Column="1" Text="{Binding Phone_number}"></TextBox>
+        <Label Visibility="Hidden" Name="MSG" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0.4"/>
         <Button Content="{Binding ActStrButton}"   x:Name="AddUser" Click="AddUser_Click" IsDefault="true" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" />
         <Button Content="Anuluj" IsCancel="true" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" />
     </Grid>

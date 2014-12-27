@@ -1,0 +1,57 @@
+﻿<Window x:Class="Rozlewnia_WPF.InputTransporterDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Firma transportowa" Height="300" Width="300">
+    <Window.Resources>
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="MaxLength" Value="32"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="MinHeight" Value="25"/>
+        <Setter Property="MaxWidth" Value="200"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Nazwa" Grid.Row="0" Grid.Column="0" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="name"></TextBox>
+         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+            <Label Content="Ulica" Margin="1,5"/>
+            <TextBox MinWidth="120" Margin="1,5" Name="street"></TextBox>
+            <Label Content="nr:" Margin="1,5"></Label>
+            <TextBox MinWidth="25" Margin="1,5" Name="house_number"></TextBox>
+            <Label Content="/"  Margin="1,5"/>
+            <TextBox MinWidth="25" Margin="1,5" Name="flat_number"></TextBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Content="Kod Pocztowy" Margin="1,5"></Label>
+            <TextBox MinWidth="22" Margin="1,5" MaxLength="2" Name="post_code_1"></TextBox>
+            <Label Content="-" Margin="1,5"></Label>
+            <TextBox MinWidth="33" Margin="1,5"  Name="post_code_2" MaxLength="3"></TextBox>
+        </StackPanel>
+        <Label Content="Miasto" Margin="5" Grid.Column="0" Grid.Row="4"></Label>
+        <TextBox Name="city" Grid.Row="4" Grid.Column="1"></TextBox>
+        <Label Content="Telefon" Margin="5" Grid.Row="5" Grid.Column="0"></Label>
+        <TextBox MaxLength="9" Grid.Row="5" Grid.Column="1" Name="phone"></TextBox>
+        <Label Visibility="Hidden" x:Name="msg" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0.4"/>
+        <Button Content="{Binding ActStrButton}"   x:Name="AddUser" Click="AddTransporter_Click" IsDefault="true" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" />
+        <Button Content="Anuluj" IsCancel="true" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" />
+    </Grid>
+</Window>

@@ -18,6 +18,19 @@ namespace Rozlewnia_WPF
     {
         private bool add;
         private string actStrButton;
+        
+        private String name;
+        private String surname;
+        private String state;
+        private String flat_number;
+        private String house_number;
+        private String post_code1;
+        private String post_code2;
+        private String city;
+        private String phone_number;
+        
+        private String id;
+
 
         public string ActStrButton
         {
@@ -39,24 +52,33 @@ namespace Rozlewnia_WPF
             if (add)
             {
                 actStrButton = "Dodaj klienta";
+                Name = "";
+                Surname = "";
+                City = "";
+                State = "";
+                Post_code1 = "";
+                Post_code2 = "";
+                Flat_number = "";
+                House_number = "";
+                Phone_number = "";
+                id = "null";
             }
             else
             {
                 actStrButton = "Zapisz dane klienta";
             }
             this.DataContext = this;
-        
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            if ((MyName.Length > 0) && (Surname.Length > 0) & ( City.Length>0)  && (Street.Length > 0) && (Postcode.Length > 0) && House_number.Length>0  && Phone_number.Length>0 )
+            if ((NName.Length > 0) && (Surname.Length > 0) & ( City.Length>0)  && (State.Length > 0) && (Postcode_ALL.Length == 6) && House_number.Length>0  && Phone_number.Length>0 )
             {
                 String flat="null";
                 if (Flat_number.Length>0)
                     flat = Filter.sql(Flat_number);
                 // result to jest id zmienionego lub utworzonego clienta procedura client, jesli result == 0 to znaczy ze jest juz taki client (imie i nazwisko)
-                int result = DataBase.Instance.call_client("null", Filter.sql(MyName),Filter.sql(Surname),Filter.sql(City),Filter.sql_with_space(Street),Filter.sql(House_number),flat,Filter.sql(Postcode),Filter.sql(Phone_number));
+                int result = DataBase.Instance.call_client(id, Filter.sql(NName),Filter.sql(Surname),Filter.sql(City),Filter.sql_with_space(State),Filter.sql(House_number),flat,Filter.sql(Postcode_ALL),Filter.sql(Phone_number));
                 if (result!=0)
                 {
                     if (add)
@@ -77,73 +99,131 @@ namespace Rozlewnia_WPF
                 }
                 else
                 {
-                    msg.Visibility = Visibility.Visible;
-                    msg.Content = "Błedne dane";
+                    MSG.Visibility = Visibility.Visible;
+                    MSG.Content = "Błedne dane";
                 }
             }
             else
             {
-                msg.Visibility = Visibility.Visible;
-                msg.Content = "Uzupełnij wszystkie pola";
+                MSG.Visibility = Visibility.Visible;
+                MSG.Content = "Uzupełnij wszystkie pola";
             }
         }
 
 
+        public String ID
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+            }
+        }
 
-        public String MyName
+        public String NName
         {
             get
             {
-                return name.Text;
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
         public String Surname
         {
             get
             {
-                return surname.Text;
+                return this.surname;
+            }
+            set
+            {
+                surname = value;
             }
         }
         public String City
         {
             get
             {
-                return city.Text;
+                return city;
+            }
+            set
+            {
+                city = value;
             }
         }
-        public String Street
+        public String State
         {
             get
             {
-                return street.Text;
+                return state;
+            }
+            set
+            {
+                state = value;
             }
         }
-        public String Postcode
+        public String Post_code1
         {
             get
             {
-                return post_code_1.Text + "-" + post_code_2.Text;
+                return post_code1;
+            }
+            set
+            {
+                post_code1 = value;
+            }
+        }
+        public String Post_code2
+        {
+            get
+            {
+                return post_code2;
+            }
+            set
+            {
+                post_code2 = value;
+            }
+        }
+        public String Postcode_ALL
+        {
+            get
+            {
+                return post_code1 + "-" + post_code2;
             }
         }
         public String Flat_number
         {
             get
             {
-                return flat_number.Text;
+                return flat_number;
+            }
+            set
+            {
+                flat_number = value;
             }
         }
         public String House_number
         {
             get
             {
-                return house_number.Text;
+                return house_number;
+            }
+            set
+            {
+                house_number = value;
             }
         }
         public String Phone_number
         {
+            set
+            {
+                phone_number = value;
+            }
             get
             {
-                return phone.Text;
+                return phone_number;
             }
         }
     

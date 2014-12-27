@@ -54,14 +54,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes.cs" />
+    <Compile Include="editBootleDialog.xaml.cs">
+      <DependentUpon>editBootleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Filter.cs" />
+    <Compile Include="InputBootleDialog.xaml.cs">
+      <DependentUpon>InputBootleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputClientDialog.xaml.cs">
+      <DependentUpon>InputClientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTakeBootleDialog.xaml.cs">
+      <DependentUpon>InputTakeBootleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputTransporterDialog.xaml.cs">
+      <DependentUpon>InputTransporterDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InputUserDialog.xaml.cs">
       <DependentUpon>InputUserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="showClientDialog.xaml.cs">
+      <DependentUpon>showClientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="StockmanStorageWindow.xaml.cs">
       <DependentUpon>StockmanStorageWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="editBootleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputBootleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputClientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputTakeBootleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputTransporterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InputUserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="showClientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

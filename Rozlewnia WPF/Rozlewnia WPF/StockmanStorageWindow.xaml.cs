@@ -44,8 +44,36 @@ namespace Rozlewnia_WPF
             {
                 MessageBox.Show("imie:" + dialog.MyName + " who " + dialog.Who);
             }
+        }
+        private void addClient_Click(object sender, RoutedEventArgs e)
+        {
+            InputClientDialog dialog = new InputClientDialog(true);
+            if ( dialog.ShowDialog()==true)
+            {
+                MessageBox.Show("imie:" + dialog.Name + " street " + dialog.State);
+            }
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            InputTakeBootleDialog dialog3 = new InputTakeBootleDialog();
+            dialog3.ShowDialog();
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void EditClient_Click(object sender, RoutedEventArgs e)
+        {
+                
+        }
+
+        private void showClient(object sender, RoutedEventArgs e)
+        {
+            showClientDialog dialog = new showClientDialog();
+            dialog.Show();
         }
     }
 }
