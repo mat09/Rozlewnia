@@ -55,8 +55,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes.cs" />
-    <Compile Include="editBootleDialog.xaml.cs">
-      <DependentUpon>editBootleDialog.xaml</DependentUpon>
+    <Compile Include="BootleEditDialog.xaml.cs">
+      <DependentUpon>BootleEditDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Filter.cs" />
     <Compile Include="InputBootleDialog.xaml.cs">
@@ -83,11 +83,14 @@
     <Compile Include="TransportOrderDialog.xaml.cs">
       <DependentUpon>TransportOrderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransportSendDialog.xaml.cs">
+      <DependentUpon>TransportSendDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="StockmanStorageWindow.xaml.cs">
       <DependentUpon>StockmanStorageWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="editBootleDialog.xaml">
+    <Page Include="BootleEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TransportOrderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransportSendDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

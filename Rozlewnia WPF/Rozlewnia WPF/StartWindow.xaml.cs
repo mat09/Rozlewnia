@@ -21,7 +21,6 @@ namespace Rozlewnia_WPF
     {
         public StartWindow()
         {
-
             //InitializeComponent();
             Window wi = new StockmanStorageWindow(); wi.Show(); this.Close();
         }

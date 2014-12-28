@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Paweł\Desktop\TO\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\
 Rozlewnia_WPF
 none
 false
 DEBUG;TRACE
-C:\Users\Paweł\Desktop\TO\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\App.xaml
-11-1301548997
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\App.xaml
+12203977250
 
-23-833702530
-12-1401562060
-editBootleDialog.xaml;InputBootleDialog.xaml;InputClientDialog.xaml;InputTakeBootleDialog.xaml;InputTransporterDialog.xaml;InputUserDialog.xaml;showClientDialog.xaml;StartWindow.xaml;StockmanStorageWindow.xaml;TransporterManageDialog.xaml;TransportOrderDialog.xaml;
+24842373590
+131583153594
+BootleEditDialog.xaml;BootleAttachDialog.xaml;ClientAdd_EditDialog.xaml;BootleGetDialog.xaml;TransporterAdd_EditDialog.xaml;UserAdd_EditDialog.xaml;ClientManageDialog.xaml;StartWindow.xaml;StockmanStorageWindow.xaml;TransporterManageDialog.xaml;TransportOrderDialog.xaml;TransportSendDialog.xaml;
 
-True
+False
 

@@ -78,7 +78,15 @@ namespace Rozlewnia_WPF
                 {
                     if (dt.SelectedCells.Count == rowAmmountTransporter)
                     {
-                        DataBase.Instance.changeTransport(bootle, trans.Id_transporter,2,null);
+                        if (DataBase.Instance.changeTransport(bootle, trans.Id_transporter, 2, null))
+                        {
+                            this.DialogResult = true;
+                            MessageBox.Show("Zamówiono transport.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Błąd");
+                        }
                     }
                     else
                     {

@@ -258,50 +258,52 @@ namespace Rozlewnia_WPF
             {
                 MySqlTransaction transaction = null;
                 MySqlCommand cmd = null;
+                int id=10;
 
                 try
                 {
+                    MySqlDataReader result;
                     transaction = sqlCon.BeginTransaction();
                     cmd = new MySqlCommand();
                     cmd.Connection = sqlCon;
                     cmd.Transaction = transaction;
+                    
+                    
+                    cmd.CommandText="INSERT INTO TRANSPORT VALUES (null,"+id_transporter+",1,now(),null,null)";
+                    cmd.ExecuteNonQuery();
+                   
 
-                    cmd.CommandText("INSERT INTO transport values (null," + id_transporter + ",1,now(),null.null)");
-
+                    cmd.CommandText = "SELECT last_insert_id()";
+                    result = cmd.ExecuteReader();
+                    if (result.Read())
+                        id = result.GetInt16(0);
+                    result.Close();
+                    System.Windows.MessageBox.Show(id + " - id");
                     foreach (searchBootleClass bo in bootle)
                     {
-                        call_statusBootle(bo.ID.ToString(),2);
-                        
+                        cmd.CommandText = "UPDATE BOOTLE SET status=2 WHERE ID="+bo.ID;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "INSERT INTO IN_TRANS VALUES(" + bo.ID + "," + id + ")";
+                        cmd.ExecuteNonQuery();
                     }
-
-
-
                     transaction.Commit();
+                    return true;
                 }
                 catch (MySqlException ex)
                 {
                     try
                     {
-                        transaction.Rollback();
+                        transaction.Rollback(); 
 
                     }
                     catch (MySqlException ex1)
                     {
-                        Console.WriteLine("Error: {0}", ex1.ToString());
+                        System.Windows.MessageBox.Show("Error1: "+ ex1.ToString());
                     }
 
-                    Console.WriteLine("Error: {0}", ex.ToString());
-
+                    System.Windows.MessageBox.Show("Error2: "+ ex.ToString());
+                    return false;
                 }
-                finally
-                {
-
-                }
-
-                
-
-                MySqlDataReader result = cmd.ExecuteReader();
-
             }
 
 
