@@ -33,3 +33,6 @@ C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Deb
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterManageDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportOrderDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportOrderDialog.g.cs
+C:\Users\Paweł\Desktop\TO\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\bin\Debug\Rozlewnia WPF.exe.config
+C:\Users\Paweł\Desktop\TO\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia WPF.exe
+C:\Users\Paweł\Desktop\TO\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia WPF.pdb
