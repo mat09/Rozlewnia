@@ -6,7 +6,204 @@ CREATE TABLE CLIENT ( id_client int(6) NOT NULL auto_increment , id_contact int(
 CREATE TABLE CONTACT ( id_contact int(6) NOT NULL auto_increment ,city varchar(32) NOT NULL, state varchar(32) NOT NULL,house_number varchar(5) NOT NULL , flat_number varchar(5) , post_code varchar(6) NOT NULL, phone_number varchar(9) NOT NULL ,PRIMARY KEY (id_contact), UNIQUE (id_contact) ) ENGINE = INNODB ;
 CREATE TABLE TRANSORTER ( id_transporter int(6) NOT NULL auto_increment , name varchar(32) NOT NULL , id_contact int(6) NOT NULL, PRIMARY KEY (id_transorter) , UNIQUE (id_transporter) , FOREIGN KEY id_contact REFERENCES CONTACT ( id_contact ) ON DELETE SET NULL ) ENGINE=INNODB;
 CREATE TABLE TRANSPORT (id_tran int(6) NOT NULL auto_increment , id_transporter int(6) NOT NULL ,type int(1) NOT NULL , data_start date DEFAULT NULL, data_end date DEFAULT NULL, PRIMARY KEY (id_trans) , UNIQUE (id_trans) , FOREIGN KEY id_transporter REFERENCES TRANSPORTER(id_transporter) ) ENGINE = INNNODB;
-CREATE TABLE IN_TRANS ( ID int(6) NOT NULL , id_tran int(6) NOT NULL , PRIMARY KEY (id_bootle, id_tran), FOREIGN KEY ID REFERENCES BOOTLE(ID) , FOREIGN KEY id_tran REFERENCES TRASPORT(id_tran) ) ENGINE = INNOBD ;
+
+
+
+
+CREATE TABLE IN_TRANS( ID int(6) NOT NULL , id_trans int(6) NOT NULL , PRIMARY KEY (ID,id_trans) , FOREIGN KEY (ID) REFERENCES BOOTLE(ID), FOREIGN KEY (id_trans) REFERENCES TRANSPORT(id_trans)) ENGINE = INNODB ;
+
+
+====   PROCEDURY ==============
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `attachBootle`(
+									IN id_client int(6),
+                                    IN ID int(6)
+								)
+BEGIN
+DECLARE zm INT;
+	INSERT INTO BOOTLE VALUES(ID,id_client,0);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `client`(
+						IN Nid_client int(6),
+						IN Nname varchar(15),
+                        IN Nsurname varchar(32),
+                        IN Ncity varchar(32),
+                        IN Nstreet varchar(32),
+                        IN Nhouse_number varchar(5),
+                        IN Nflat_number varchar(5),
+                        IN Npost_code varchar(6),
+                        IN Nphone_number varchar(9)
+                        )
+BEGIN
+DECLARE zm1 INT;
+DECLARE zm2 INT;
+DECLARE id INT;
+start transaction;
+	IF Nflat_number is NULL THEN SET Nflat_number='';
+    end if;
+	IF Nid_client is NULL THEN 
+		INSERT INTO CONTACT VALUES (null,Ncity,Nstreet,NHouse_number,Nflat_number,Npost_code,Nphone_number);
+        SET id = last_insert_id();
+		INSERT INTO CLIENT VALUES (null,id,Nname,Nsurname);
+        SET id = last_insert_id();
+	else 
+		SET zm1=(SELECT COUNT(*) FROM client WHERE id_client = Nid_client);
+		IF zm1=1 then
+			UPDATE client SET 
+						name = Nname,
+						surname = Nsurname
+						WHERE id_client=Nid_client;
+			UPDATE contact set
+						city = Ncity ,
+						state = Nstreet,
+                        house_number = Nhouse_number,
+                        flat_number = Nflat_number,
+                        post_code = Npost_code,
+                        phone_number = Nphone_number 
+						WHERE id_contact = ( SELECT id_contact FROM CLIENT WHERE id_client = Nid_client);
+			SET id=Nid_client;
+		end if;
+	end if;
+    SET zm1 = (SELECT COUNT(*) FROM CLIENT WHERE name= Nname and surname=Nsurname);
+    SET zm2 = (SELECT COUNT(*) FROM CONTACT WHERE city = Ncity AND state=Nstreet AND house_number = Nhouse_number AND post_code = Npost_code AND phone_number = Nphone_number);
+    IF zm1=1 AND zm2>=1 THEN
+		COMMIT;
+	else
+		SET id = 0;
+		ROLLBACK;
+	end if;
+    SELECT id;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteBootle`(IN DID int(6))
+BEGIN
+DECLARE zm INT;
+DECLARE zm2 INT;
+START TRANSACTION;
+SET zm=(SELECT COUNT(*) FROM BOOTLE WHERE ID=DID AND status=0);
+IF zm=1 THEN 
+	DELETE FROM BOOTLE WHERE ID=DID;
+end if;
+SET zm2=(SELECT COUNT(*) FROM BOOTLE WHERE ID=DID );
+IF zm2=0 AND zm=1 THEN
+	COMMIT;
+ELSE ROLLBACK;
+end if;
+SELECT zm,zm2;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `statusBootle`(	
+                                    IN NID int(6),
+                                    IN Nstatus int(6)
+                                    )
+BEGIN
+DECLARE previous_status INT;
+DECLARE zm INT;
+DECLARE zm2 INT;
+START TRANSACTION;
+SET zm2=0;
+SET previous_status= (SELECT status From BOOTLE WHERE ID=NID);
+if previous_status=7 THEN 
+	SET previous_status=-1;
+end if;
+if previous_status+1=Nstatus then
+		UPDATE BOOTLE SET 
+				status = Nstatus 
+					WHERE ID=NID;
+	SET zm2 = 1 ;
+end if;
+	SET zm = (SELECT COUNT(*) FROM BOOTLE WHERE ID=NID AND status = Nstatus);
+if zm=1 and zm2=1 THEN COMMIT;
+else ROLLBACK;
+end if;
+SELECT zm,zm2;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `transporter`(
+						IN Nid_transporter int(6),
+						IN Nname varchar(128),
+                        IN Ncity varchar(32),
+                        IN Nstreet varchar(32),
+                        IN Nhouse_number varchar(5),
+                        IN Nflat_number varchar(5),
+                        IN Npost_code varchar(6),
+                        IN Nphone_number varchar(9)
+                        )
+BEGIN
+DECLARE zm1 INT;
+DECLARE zm2 INT;
+DECLARE id INT;
+start transaction;
+	IF Nflat_number is NULL THEN SET Nflat_number='';
+    end if;
+	IF Nid_transporter is NULL THEN 
+		INSERT INTO CONTACT VALUES (null,Ncity,Nstreet,NHouse_number,Nflat_number,Npost_code,Nphone_number);
+        SET id = last_insert_id();
+		INSERT INTO TRANSPORTER VALUES (null,Nname,id);
+        SET id = last_insert_id();
+	else 
+		SET zm1=(SELECT COUNT(*) FROM transporter WHERE id_transporter = Nid_transporter);
+		IF zm1=1 then
+			UPDATE transporter SET 
+						name = Nname
+						WHERE id_transporter = Nid_transporter;
+			UPDATE contact set
+						city = Ncity ,
+						state = Nstreet,
+                        house_number = Nhouse_number,
+                        flat_number = Nflat_number,
+                        post_code = Npost_code,
+                        phone_number = Nphone_number 
+						WHERE id_contact = ( SELECT id_contact FROM TRANSPORTER WHERE id_transporter = Nid_transporter);
+			SET id=Nid_transporter;
+		end if;
+	end if;
+    SET zm1 = (SELECT COUNT(*) FROM TRANSPORTER WHERE transporter.name= Nname and id_transporter = id);
+    SET zm2 = (SELECT COUNT(*) FROM CONTACT WHERE city = Ncity AND state=Nstreet AND house_number = Nhouse_number AND post_code = Npost_code AND phone_number = Nphone_number);
+    IF zm1=1 AND zm2>=1 THEN
+		COMMIT;
+	else
+		SET id = 0;
+		ROLLBACK;
+	end if;
+    SELECT id;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `user`(IN Nid_user int(6),
+						IN Nwho int(1),
+						IN Nlogin varchar(15),
+                        IN Npassword varchar(32),
+                        IN Nname varchar(15),
+                        IN Nsurname varchar(32))
+BEGIN
+DECLARE zm INT;
+start transaction;
+	set zm = (SELECT COUNT(id_user) FROM USERS WHERE login = Nlogin OR id_user=Nid_user);
+    IF zm=1 then
+		IF Npassword = '' THEN SET Npassword = (SELECT password FROM USERS WHERE id_user=Nid_user OR login like Nlogin );
+		END IF;
+		UPDATE USERS SET 
+						who = Nwho,
+						login = Nlogin,
+                        password= Npassword,
+                        name = Nname,
+                        surname= Nsurname WHERE id_user = Nid_user or login = Nlogin;
+	ELSE if zm=0 then 
+		INSERT INTO USERS VALUES (NULL,Nwho,Nlogin,Npassword,Nname,Nsurname);
+	end if;
+    end if;
+COMMIT;
+end
+
+================================
+
+
+
+
+
+
+
 
 
 
