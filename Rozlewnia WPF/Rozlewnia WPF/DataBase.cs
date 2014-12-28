@@ -240,7 +240,7 @@ namespace Rozlewnia_WPF
             result.Close();
             return ret;
         }
-        internal int call_transporter(string id_transporter, string name, string city, string street, string house_number, string flat_number, string post_code, string phone_number)
+        internal int  call_transporter(string id_transporter, string name, string city, string street, string house_number, string flat_number, string post_code, string phone_number)
         {
             //System.Windows.MessageBox.Show("CALL client(" + id_client + ",'" + name + "','" + surname + "','" + city + "','" + street + "'," + house_number + "," + flat_number + ",'" + post_code + "','" + phone_number + "')");
             MySqlCommand cmd = new MySqlCommand("CALL transporter(" + id_transporter + ",'" + name + "','" + city + "','" + street + "','" + house_number + "','" + flat_number + "','" + post_code + "','" + phone_number + "')", sqlCon);
@@ -251,6 +251,63 @@ namespace Rozlewnia_WPF
             result.Close();
             return id;
         }
+        internal bool changeTransport(List<searchBootleClass> bootle, String id_transporter, int status, String id_trans)
+        {
+
+            if (id_trans == null)//dodawanie nowego transportu
+            {
+                MySqlTransaction transaction = null;
+                MySqlCommand cmd = null;
+
+                try
+                {
+                    transaction = sqlCon.BeginTransaction();
+                    cmd = new MySqlCommand();
+                    cmd.Connection = sqlCon;
+                    cmd.Transaction = transaction;
+
+                    cmd.CommandText("INSERT INTO transport values (null," + id_transporter + ",1,now(),null.null)");
+
+                    foreach (searchBootleClass bo in bootle)
+                    {
+                        call_statusBootle(bo.ID.ToString(),2);
+                        
+                    }
+
+
+
+                    transaction.Commit();
+                }
+                catch (MySqlException ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+
+                    }
+                    catch (MySqlException ex1)
+                    {
+                        Console.WriteLine("Error: {0}", ex1.ToString());
+                    }
+
+                    Console.WriteLine("Error: {0}", ex.ToString());
+
+                }
+                finally
+                {
+
+                }
+
+                
+
+                MySqlDataReader result = cmd.ExecuteReader();
+
+            }
+
+
+            return false;
+        }
+
 
         internal List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
         {
@@ -352,6 +409,6 @@ namespace Rozlewnia_WPF
             return list;
 
         }
-      
+        
     }
 }
