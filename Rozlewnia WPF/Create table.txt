@@ -29,6 +29,9 @@ status Butli :
 
 
 
-
+type transporter:
+	
+	1: do rozlewni
+	2: do magazynu
 
 

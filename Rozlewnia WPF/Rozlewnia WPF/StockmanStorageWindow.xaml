@@ -47,9 +47,10 @@
         <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="5" Grid.Column="2">
             <StackPanel Margin="10">
                 <Button Click="Button_Click">Odbierz Butle do napelnienia</Button>
-                <Button Margin="0,10" Click="Button_Click_2">Transport</Button>
-                <Button Click="Button_Click_1">Dodaj firme trasnportowa</Button>
+                <Button Margin="0,10" Click="Button_Click_2">Zarządzaj: Firmy transportowe</Button>
+                <Button Content="dodaj uzytkownika" Click="addUser_Click" Grid.Row="2" Grid.Column="2" />
                 <Button Click="showClient" Content="Zarzadaj:Klienci" Margin="0,10"> </Button>
+                <Button Click="showTransportOrder_Click" Content="Zamów transport" ></Button>
             </StackPanel>
         </Border>
     </Grid>

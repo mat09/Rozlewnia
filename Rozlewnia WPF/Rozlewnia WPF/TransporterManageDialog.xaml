@@ -1,0 +1,27 @@
+﻿<Window x:Class="Rozlewnia_WPF.TransporterManageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Firmy transportowe" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Nazwa" Grid.Row="0" Grid.Column="0" Margin="5,0" HorizontalAlignment="Center"></Label>
+        <Label Content="Numer telefonu" Grid.Row="0" Grid.Column="1" Margin="5,0" HorizontalAlignment="Center"></Label>
+        <TextBox Text="{Binding NName,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="5,3" MaxLength="15" MinWidth="140" TextChanged="TextChanged"></TextBox>
+        <TextBox Text="{Binding Phone,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5,3" MaxLength="32" MaxWidth="300" TextChanged="TextChanged"></TextBox>
+        <DataGrid Name="dt" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" HorizontalAlignment="Center">
+            <Button Content=" Dodaj " Margin="5,6" Click="add_Click"></Button>
+            <Button Content=" Edytuj " Margin="5,6" Click="edit_Click"></Button>
+            <Button Content=" Zamknij " IsCancel="True" Margin="5,6"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

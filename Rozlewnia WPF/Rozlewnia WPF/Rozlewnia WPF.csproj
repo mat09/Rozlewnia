@@ -77,6 +77,12 @@
     <Compile Include="showClientDialog.xaml.cs">
       <DependentUpon>showClientDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransporterManageDialog.xaml.cs">
+      <DependentUpon>TransporterManageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransportOrderDialog.xaml.cs">
+      <DependentUpon>TransportOrderDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="StockmanStorageWindow.xaml.cs">
       <DependentUpon>StockmanStorageWindow.xaml</DependentUpon>
@@ -123,6 +129,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="StockmanStorageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransporterManageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransportOrderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

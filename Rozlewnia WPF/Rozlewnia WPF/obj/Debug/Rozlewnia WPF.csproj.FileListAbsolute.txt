@@ -29,3 +29,7 @@ C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Deb
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\showClientDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\editBootleDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\editBootleDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterManageDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterManageDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportOrderDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportOrderDialog.g.cs

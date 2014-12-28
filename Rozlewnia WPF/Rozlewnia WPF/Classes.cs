@@ -29,7 +29,6 @@ namespace Rozlewnia_WPF
 
     }
 
-
     class searchBootleClass : INotifyPropertyChanged
     {
         private String surname;
@@ -114,7 +113,68 @@ namespace Rozlewnia_WPF
 
     class Transporter
     {
-        public Transporter() { }
+        private String id_transporter;
+        public String Id_transporter
+        {
+            get { return id_transporter; }
+            set { id_transporter = value; }
+        }
+
+        private String name;
+        public String NName
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private String state;
+        public String State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
+        private String house_number;
+        public String House_number
+        {
+            get { return house_number; }
+            set { house_number = value; }
+        }
+
+        private String flat_number;
+        public String Flat_number
+        {
+            get
+            {
+                return flat_number;
+            }
+            set
+            {
+                flat_number = value;
+            }
+        }
+
+        private String city;
+        public String City
+        {
+            get { return city; }
+            set { city = value; }
+        }
+
+        private String post_code;
+        public String Post_code
+        {
+            get { return post_code; }
+            set { post_code = value; }
+        }
+
+        private String phone_number;
+        public String Phone_number
+        {
+            get { return phone_number; }
+            set { phone_number = value; }
+        }
+        
     }
     class Client
     {
@@ -187,10 +247,10 @@ namespace Rozlewnia_WPF
   set { phone_number = value; }
 }
         
-        
-       
-
     }
+
+
+    // nieprzydatne poki co :|
     //    Pattern::  Iterator
     class Iterator<X> where X : class, new()
     {

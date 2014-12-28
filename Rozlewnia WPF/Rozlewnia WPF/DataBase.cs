@@ -252,7 +252,7 @@ namespace Rozlewnia_WPF
             return id;
         }
 
-        public List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
+        internal List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
         {
             List <searchBootleClass> list = new List<searchBootleClass>();
             String query = "SELECT ID , name ,surname FROM BOOTLE, CLIENT WHERE client.id_client = bootle.id_client ";
@@ -260,6 +260,8 @@ namespace Rozlewnia_WPF
             if (surname != "" && surname!=null) query += " AND client.surname='" + surname + "'";
             if (ID != "" && ID!=null) query += " AND bootle.ID=" + ID;
             if (status!=-1) query+= " AND bootle.status=" + status;
+
+            System.Windows.MessageBox.Show(query);
             
             MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader result = cmd.ExecuteReader();
@@ -319,7 +321,37 @@ namespace Rozlewnia_WPF
             result.Close();
             return list;
         }
+        internal List<Transporter> showTransporter(String Name , String Phone)
+        {
+            List<Transporter> list = new List<Transporter>();
+            String query = "SELECT id_transporter , name  , state , house_number , flat_number , city , post_code , phone_number FROM CONTACT, TRANSPORTER WHERE transporter.id_contact = contact.id_contact ";
+            if (Name != "" && Phone != null) query += " AND transporter.name='" + Name + "'";
+            if (Phone != "" && Phone != null) query += " AND contact.phone_number='" + Phone + "'";
 
+            System.Windows.MessageBox.Show(query);
+            
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            while (result.Read())
+            {
+
+                list.Add(new Transporter()
+                {
+                    Id_transporter = result.GetString(0),
+                    NName = result.GetString(1),
+                    State = result.GetString(2),
+                    House_number = result.GetString(3),
+                    Flat_number = result.GetString(4),
+                    City = result.GetString(5),
+                    Post_code = result.GetString(6),
+                    Phone_number = result.GetString(7)
+                }
+                );
+            }
+            result.Close();
+            return list;
+
+        }
       
     }
 }
