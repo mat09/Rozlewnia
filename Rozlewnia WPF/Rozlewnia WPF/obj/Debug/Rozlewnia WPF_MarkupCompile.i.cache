@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\App.xaml
-13216824514
+13693521076
 
-25336004432
+25914308190
 131583153594
-BootleAddToSendDialog.xaml;BootleEditDialog.xaml;BootleAttachDialog.xaml;ClientAdd_EditDialog.xaml;BootleGetDialog.xaml;TransporterAdd_EditDialog.xaml;UserAdd_EditDialog.xaml;ClientManageDialog.xaml;StartWindow.xaml;StockmanStorageWindow.xaml;TransporterManageDialog.xaml;TransportOrderDialog.xaml;TransportSendDialog.xaml;
+BootleAddToSendDialog.xaml;BootleEditDialog.xaml;BootleAttachDialog.xaml;ClientAdd_EditDialog.xaml;BootleGet_GiveDialog.xaml;TransporterAdd_EditDialog.xaml;UserAdd_EditDialog.xaml;ClientManageDialog.xaml;StartWindow.xaml;StockmanStorageWindow.xaml;TransporterManageDialog.xaml;TransportOrderDialog.xaml;TransportSendDialog.xaml;
 
-False
+True
 

@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace Rozlewnia_WPF
 {
-   public partial class InputTakeBootleDialog : Window
+   public partial class BootleGet_GiveDialog : Window
     {
         private String surname;
         public String Surname
@@ -42,22 +42,43 @@ namespace Rozlewnia_WPF
         }
 
         searchBootleClass selectedBootle;
-
-          public InputTakeBootleDialog()
+        bool get;
+        String actStrButton;
+        public String ActStrButton
         {
+            get { return actStrButton; }
+            set { actStrButton = value; }
+        }
+        int status;
+
+        public BootleGet_GiveDialog(bool GET)
+        {
+            get = GET;
             InitializeComponent();
+            if (get)
+            {
+                this.Title = "Odbierz butle";
+                status = 0;
+                actStrButton = "Odbierz";
+            }
+            else
+            {
+                this.Title = "Wydaj butle";
+                status = 7;
+                actStrButton = "Wydaj";
+            }
             this.DataContext = this;
             resultDataGrid.CanUserAddRows = false;
             resultDataGrid.CanUserDeleteRows = false;
             resultDataGrid.IsReadOnly = true;
             
-            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name,Surname,ID,0,-1);
+            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name,Surname,ID,status,-1);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //MessageBox.Show("Name:"+Name+" , Surname="+Surname+" , ID=" + ID);
-            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name, Surname, ID,0,-1);
+            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name, Surname, ID,status,-1);
         }
 
         private void selectBootle_Click(object sender, RoutedEventArgs e)
@@ -67,14 +88,27 @@ namespace Rozlewnia_WPF
             {
                 if (resultDataGrid.SelectedCells.Count == 3)
                 {
-                    if(DataBase.Instance.call_statusBootle(selectedBootle.ID.ToString(),1))
+                    if (get)
                     {
-                        this.DialogResult = true;
-                        MessageBox.Show("Odebrano butle do napełnienia.");
+                        if (DataBase.Instance.call_statusBootle(selectedBootle.ID.ToString(), 1))
+                        {
+                            this.DialogResult = true;
+                            MessageBox.Show("Odebrano butle do napełnienia.");
+                        }
+                        else
+                            MessageBox.Show("Nie można zmienić statusu butli.");
                     }
                     else
-                        MessageBox.Show("Nie można zmienić statusu butli.");
-                    
+                    {
+                        if (DataBase.Instance.call_statusBootle(selectedBootle.ID.ToString(), 0))
+                        {
+                            User.Instance.addBootleCount();
+                            this.DialogResult = true;
+                            MessageBox.Show("Wydano butle do napełnienia.");
+                        }
+                        else
+                            MessageBox.Show("Nie można zmienić statusu butli.");
+                    }
                 }
                 else
                 {

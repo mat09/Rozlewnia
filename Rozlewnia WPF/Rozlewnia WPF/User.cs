@@ -17,6 +17,7 @@ namespace Rozlewnia_WPF
 
         private Boolean interfaceLock = false;
         private Dictionary<String, object> data;
+        private int giveBootleCount;
 
         static private User instance;
         static private Boolean logIN;
@@ -61,6 +62,7 @@ namespace Rozlewnia_WPF
                 who = Convert.ToInt16(data["who"]);
                 if (who != 0)
                 {
+                    giveBootleCount = 0;
                     logIN = true;
                     DataBase.Instance.insertSession(Convert.ToInt16(data["id_user"]),true);
                     return 1;
@@ -81,6 +83,7 @@ namespace Rozlewnia_WPF
                 instance = null;
                 DataBase.Instance.insertSession(Convert.ToInt16(data["id_user"]),false);
                 data = null;
+                giveBootleCount = 0;
             }
         }
         public int tellMeWho()
@@ -88,20 +91,27 @@ namespace Rozlewnia_WPF
             return who;
         }
         public void interfaceBlock() { }
+        public void addBootleCount()
+        {
+            giveBootleCount++;
+        }
 
+        public class Stockman : User
+        {
+            public void addBootleCount()
+            {
+                giveBootleCount++;
+            }
+        }
 
-        private class Stockman : User
+        public class StockmanStorage : Stockman
         {
         }
 
-        private class StockmanStorage : Stockman
+        public class StockmanBooting : Stockman
         {
         }
-
-        private class StockmanBooting : Stockman
-        {
-        }
-        private class Admin : User
+        public class Admin : User
         {
             public Admin() { }
         }

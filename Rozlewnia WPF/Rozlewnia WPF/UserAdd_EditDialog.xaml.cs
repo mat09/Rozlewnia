@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 
 namespace Rozlewnia_WPF
 {
-    public partial class InputUserDialog : Window
+    public partial class UserAdd_EditDialog : Window
     {
         private ConfigurationData data;
         private bool add;
-        public InputUserDialog(bool a)
+        public UserAdd_EditDialog(bool ADD)
         {
-            add = a;
+            add = ADD;
             data = new ConfigurationData();
             if (add)
             {

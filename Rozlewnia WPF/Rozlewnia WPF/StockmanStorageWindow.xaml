@@ -40,18 +40,17 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Content="BUTLE" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" ></Label>
-            <Button Name="GetBootleButton" Click="GetBootleButton_Click" Grid.Row="2" Grid.Column="0" Margin="10" MaxHeight="30" >Obierz butle</Button>
             <Button Content="dodaj uzytkownika" Click="addUser_Click" Grid.Row="2" Grid.Column="2" Margin="10"/>
-            <Button Content="Dodaj klienta" Click="addClient_Click" Grid.Row="2" Grid.Column="3" Margin="10"></Button>
         </Grid>
         <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="5" Grid.Column="2">
             <StackPanel Margin="10">
-                <Button Click="Button_Click">Odbierz Butle do napelnienia</Button>
-                <Button Margin="0,10" Click="Button_Click_2">Zarządzaj: Firmy transportowe</Button>
+                <Button Click="showGetBootle_Click">Odbierz Butle do napelnienia</Button>
+                <Button Margin="0,10" Click="showTransporterManager_Click">Zarządzaj: Firmy transportowe</Button>
                 <Button Content="dodaj uzytkownika" Click="addUser_Click" Grid.Row="2" Grid.Column="2" />
                 <Button Click="showClient" Content="Zarzadaj:Klienci" Margin="0,10"> </Button>
                 <Button Click="showTransportOrder_Click" Content="Zamów transport" ></Button>
                 <Button Content="Wyślij transport" Click="showSendTransport_click" Margin="0,10"></Button>
+                <Button Content="Wydaj butle" Click="showGiveBootle_Clisk"></Button>
             </StackPanel>
         </Border>
     </Grid>

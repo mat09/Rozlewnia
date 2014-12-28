@@ -28,15 +28,15 @@ C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Deb
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportSendDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAttachDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientAdd_EditDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGetDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterAdd_EditDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientManageDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAttachDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientAdd_EditDialog.g.cs
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGetDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterAdd_EditDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\UserAdd_EditDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientManageDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\UserAdd_EditDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAddToSendDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAddToSendDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGet_GiveDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGet_GiveDialog.g.cs

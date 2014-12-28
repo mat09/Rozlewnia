@@ -25,51 +25,15 @@ namespace Rozlewnia_WPF
             this.DataContext = this;
         }
 
+
+
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             User.Instance.logout();
             Application.Current.Shutdown();
             
         }
-
-        private void GetBootleButton_Click(Object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void addUser_Click(object sender, RoutedEventArgs e)
-        {
-            InputUserDialog dialog = new InputUserDialog(true);
-            if (dialog.ShowDialog() == true)
-            {
-                MessageBox.Show("imie:" + dialog.MyName + " who " + dialog.Who);
-            }
-        }
-        private void addClient_Click(object sender, RoutedEventArgs e)
-        {
-            InputClientDialog dialog = new InputClientDialog(true);
-            if ( dialog.ShowDialog()==true)
-            {
-                MessageBox.Show("imie:" + dialog.Name + " street " + dialog.State);
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            InputTakeBootleDialog dialog3 = new InputTakeBootleDialog();
-            dialog3.ShowDialog();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void EditClient_Click(object sender, RoutedEventArgs e)
-        {
-                
-        }
-
+        
         private void showClient(object sender, RoutedEventArgs e)
         {
             showClientDialog dialog = new showClientDialog();
@@ -95,6 +59,39 @@ namespace Rozlewnia_WPF
             if (dialog.ShowDialog() == true)
             {
                 MessageBox.Show("Transport wysłano.");
+            }
+        }
+
+        private void showGiveBootle_Clisk(object sender, RoutedEventArgs e)
+        {
+            BootleGet_GiveDialog dialog = new BootleGet_GiveDialog(false);
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("Wydano butle klientowi");
+            }
+        }
+
+        private void showGetBootle_Click(object sender, RoutedEventArgs e)
+        {
+            BootleGet_GiveDialog dialog = new BootleGet_GiveDialog(true);
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("Odebrano butle do napełnienia");
+            }
+        }
+
+        private void showTransporterManager_Click(object sender, RoutedEventArgs e)
+        {
+            TransporterManageDialog dialog = new TransporterManageDialog();
+            dialog.ShowDialog();    
+        }
+
+        private void addUser_Click(object sender, RoutedEventArgs e)
+        {
+            UserAdd_EditDialog dialog = new UserAdd_EditDialog(true);
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("Dodano uzytkownika");
             }
         }
     }

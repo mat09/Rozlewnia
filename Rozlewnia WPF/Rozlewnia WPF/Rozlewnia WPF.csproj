@@ -68,8 +68,8 @@
     <Compile Include="ClientAdd_EditDialog.xaml.cs">
       <DependentUpon>ClientAdd_EditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BootleGetDialog.xaml.cs">
-      <DependentUpon>BootleGetDialog.xaml</DependentUpon>
+    <Compile Include="BootleGet_GiveDialog.xaml.cs">
+      <DependentUpon>BootleGet_GiveDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="TransporterAdd_EditDialog.xaml.cs">
       <DependentUpon>TransporterAdd_EditDialog.xaml</DependentUpon>
@@ -109,7 +109,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BootleGetDialog.xaml">
+    <Page Include="BootleGet_GiveDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
