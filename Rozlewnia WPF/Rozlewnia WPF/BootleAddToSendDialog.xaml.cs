@@ -39,7 +39,7 @@ namespace Rozlewnia_WPF
             {
                 if(dt.SelectedCells.Count >= rowAmmount)
                 {
-                    if (DataBase.Instance.changeTransport(bootle, null, 3, id_trans, true))
+                    if (DataBase.Instance.changeTransport(bootle, null, 3, id_trans, true,null))
                     {
                         this.DialogResult = true;
                     }

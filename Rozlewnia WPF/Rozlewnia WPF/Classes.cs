@@ -271,6 +271,12 @@ namespace Rozlewnia_WPF
         }
 
         private String data_start;
+
+        public String Data_start
+        {
+            get { return data_start; }
+            set { data_start = value; }
+        }
         private String data_end;
 
         private String id_transport;

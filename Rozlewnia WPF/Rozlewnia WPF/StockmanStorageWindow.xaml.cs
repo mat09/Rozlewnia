@@ -17,10 +17,22 @@ namespace Rozlewnia_WPF
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
+    /// 
+    
     public partial class StockmanStorageWindow : Window
     {
+        private String userString;
+
+        public String UserString
+        {
+            get { return userString; }
+            set { userString = value; }
+        }
+
+        
         public StockmanStorageWindow()
         {
+            userString = " Jakiś Gienio z afryki";
             InitializeComponent();
             this.DataContext = this;
         }
@@ -93,6 +105,20 @@ namespace Rozlewnia_WPF
             {
                 MessageBox.Show("Dodano uzytkownika");
             }
+        }
+
+        private void showGetTransport_Click(object sender, RoutedEventArgs e)
+        {
+            TransportGetDialog dialog = new TransportGetDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("Odebrano transport");
+            }
+        }
+
+        private void blockInterface_Click(object sender, RoutedEventArgs e)
+        {
+                
         }
     }
 }

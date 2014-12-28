@@ -269,10 +269,10 @@ namespace Rozlewnia_WPF
              *                          dodaje bulte do in_tran
              *                  aby ja wywolac trzeba ustawic w wywolaniu add_bootle=true
          */
-        internal bool changeTransport(List<searchBootleClass> bootle, String id_transporter, int status, String id_trans,bool add_bootle)
+        internal bool changeTransport(List<searchBootleClass> bootle, String id_transporter, int status, String id_trans,bool add_bootle,String data)
         {
 
-            if ( id_trans == null && id_transporter!=null && add_bootle==false )//dodawanie nowego transportu
+            if (id_trans == null && id_transporter != null && add_bootle == false && data == null)//dodawanie nowego transportu
             {
                 MySqlTransaction transaction = null;
                 MySqlCommand cmd = null;
@@ -322,11 +322,11 @@ namespace Rozlewnia_WPF
                     return false;
                 }
             }
-            if( id_trans != null && id_transporter==null && add_bootle==false)  // wysylanie transportu
+            if( id_trans != null && id_transporter==null && add_bootle==false && data!=null )  // wysylanie i odnieranie transportu
             {
                 MySqlTransaction transaction = null;
                 MySqlCommand cmd = null;
-                System.Windows.MessageBox.Show("asd wchodzi count:"+bootle.Count);
+                
                 try
                 {
                     transaction = sqlCon.BeginTransaction();
@@ -335,11 +335,11 @@ namespace Rozlewnia_WPF
                     cmd.Transaction = transaction;
 
 
-                    cmd.CommandText = "UPDATE TRANSPORT SET data_start=now() WHERE id_trans=" + id_trans;
+                    cmd.CommandText = "UPDATE TRANSPORT SET "+data+"=now() WHERE id_trans=" + id_trans;
                     cmd.ExecuteNonQuery();
                     foreach (searchBootleClass bo in bootle)
                     {
-                        cmd.CommandText = "UPDATE BOOTLE SET status=3 WHERE ID=" + bo.ID;
+                        cmd.CommandText = "UPDATE BOOTLE SET status="+status+" WHERE ID=" + bo.ID;
                         cmd.ExecuteNonQuery();
                     }
                     transaction.Commit();
@@ -361,7 +361,7 @@ namespace Rozlewnia_WPF
                     return false;
                 }
             }
-            if (id_trans != null && id_transporter == null && add_bootle == true) // dodawnanie butli do zamowionego transportu
+            if (id_trans != null && id_transporter == null && add_bootle == true && data == null) // dodawnanie butli do zamowionego transportu
             {
                 MySqlTransaction transaction = null;
                 MySqlCommand cmd = null;
@@ -515,13 +515,18 @@ namespace Rozlewnia_WPF
         internal List<Transport> showTransport(int type)
         {
             List<Transport> list = new List<Transport>();
-            String query = "SELECT transport.id_trans ,transporter.name,contact.phone_number,transport.data_ordered FROM TRANSPORT,TRANSPORTER,CONTACT WHERE TRANSPORT.id_transporter=TRANSPORTER.id_transporter AND data_start is null AND contact.id_contact=transporter.id_contact AND transport.type=" + type;
-            
+            String query = null;
+            if(type == 1)
+                query = "SELECT transport.id_trans ,transporter.name,contact.phone_number,transport.data_ordered FROM TRANSPORT,TRANSPORTER,CONTACT WHERE TRANSPORT.id_transporter=TRANSPORTER.id_transporter AND data_start is null AND contact.id_contact=transporter.id_contact AND transport.type=1";
+            if(type == 2 )
+                query = "SELECT transport.id_trans ,transporter.name,contact.phone_number,transport.data_start FROM TRANSPORT,TRANSPORTER,CONTACT WHERE TRANSPORT.id_transporter=TRANSPORTER.id_transporter AND data_end is null AND data_start is not null AND contact.id_contact=transporter.id_contact AND transport.type=2";
+
+
             MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader result = cmd.ExecuteReader();
+            if(type == 1)
             while (result.Read())
             {
-
                 list.Add(new Transport()
                 {
                     Id_transport = result.GetString(0),
@@ -530,6 +535,20 @@ namespace Rozlewnia_WPF
                     Data_ordered= result.GetString(3)
                 }
                 );
+            }
+            else if (type == 2)
+            {
+                while (result.Read())
+                {
+                    list.Add(new Transport()
+                    {
+                        Id_transport = result.GetString(0),
+                        NName = result.GetString(1),
+                        Phone_number = result.GetString(2),
+                        Data_start = result.GetString(3)
+                    }
+                    );
+                }
             }
             result.Close();
             return list;

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Rozlewnia_WPF.InputBootleDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Przypisz butle" Height="149" Width="205">
+        Title="Przypisz butle" Height="149" Width="205" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

@@ -15,16 +15,15 @@ using System.Windows.Shapes;
 namespace Rozlewnia_WPF
 {
     /// <summary>
-    /// Interaction logic for TransportSendDialog.xaml
+    /// Interaction logic for TransportGetDialog.xaml
     /// </summary>
-    public partial class TransportSendDialog : Window
+    public partial class TransportGetDialog : Window
     {
-        static int rowAmmountTransporter = 5;
         Transport trans;
+        static int rowAmmountTransporter = 5;
 
-        public TransportSendDialog()
+        public TransportGetDialog()
         {
-            trans = null;
             InitializeComponent();
             dt.CanUserAddRows = false;
             dt.CanUserDeleteRows = false;
@@ -32,27 +31,21 @@ namespace Rozlewnia_WPF
             dt2.CanUserAddRows = false;
             dt2.CanUserDeleteRows = false;
             dt2.IsReadOnly = true;
-            dt.ItemsSource = DataBase.Instance.showTransport(1);
+            dt.ItemsSource = DataBase.Instance.showTransport(2);
             this.DataContext = this;
+        
         }
 
-        private void AddBootleToTransport_Clik(object sender, RoutedEventArgs e)
+        private void dt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             trans = dt.SelectedItem as Transport;
             if (trans != null)
             {
-                BootleAddToSendDialog dialog = new BootleAddToSendDialog(trans.Id_transport);
-                if (dialog.ShowDialog() == true)
-                {
-                    dt2.ItemsSource = DataBase.Instance.searchBootle(null, null, null, 2, int.Parse(trans.Id_transport));
-                    MessageBox.Show("Dodano butle.");
-                }
+                dt2.ItemsSource = DataBase.Instance.searchBootle(null, null, null, 6, int.Parse(trans.Id_transport));
             }
-            
-
         }
 
-        private void SendTransport_Click(object sender, RoutedEventArgs e)
+        private void GetTransport_Click(object sender, RoutedEventArgs e)
         {
             dt2.SelectAll();
             List<searchBootleClass> bootle = dt2.SelectedItems.OfType<searchBootleClass>().ToList();
@@ -64,14 +57,22 @@ namespace Rozlewnia_WPF
                 {
                     if (dt.SelectedCells.Count == rowAmmountTransporter)
                     {
-                        if (DataBase.Instance.changeTransport(bootle, null, 3, trans.Id_transport,false,"data_start"))
+                        if (MessageBox.Show("Czy na pewno wszytkie butle sie zgadzają z listą transportową?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Stop) == MessageBoxResult.Yes)
                         {
-                            this.DialogResult = true;
+                            if (DataBase.Instance.changeTransport(bootle, null, 7, trans.Id_transport, false, "data_end"))
+                            {
+                                this.DialogResult = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Błąd");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Błąd");
+                            MessageBox.Show("tu sie dorobi funkcjonalnosc");
                         }
+                        
                     }
                     else
                     {
@@ -80,21 +81,12 @@ namespace Rozlewnia_WPF
                 }
                 else
                 {
-                    MessageBox.Show("Błąd. W transporcie nie ma butli do wysłania");
+                    MessageBox.Show("Błąd. W transporcie nie ma butli do odebrania");
                 }
             }
             else
             {
                 MessageBox.Show("Nie zaznaczono firmy transportowej.");
-            }
-        }
-
-        private void dt_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            trans = dt.SelectedItem as Transport;
-            if(trans!=null)
-            {
-                dt2.ItemsSource = DataBase.Instance.searchBootle(null, null, null, 2, int.Parse(trans.Id_transport));
             }
         }
     }
