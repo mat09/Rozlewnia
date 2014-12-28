@@ -51,13 +51,13 @@ namespace Rozlewnia_WPF
             resultDataGrid.CanUserDeleteRows = false;
             resultDataGrid.IsReadOnly = true;
             
-            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name,Surname,ID,0);
+            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name,Surname,ID,0,-1);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //MessageBox.Show("Name:"+Name+" , Surname="+Surname+" , ID=" + ID);
-            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name, Surname, ID,0);
+            resultDataGrid.ItemsSource = DataBase.Instance.searchBootle(Name, Surname, ID,0,-1);
         }
 
         private void selectBootle_Click(object sender, RoutedEventArgs e)

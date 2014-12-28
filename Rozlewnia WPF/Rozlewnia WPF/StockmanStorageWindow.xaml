@@ -51,6 +51,7 @@
                 <Button Content="dodaj uzytkownika" Click="addUser_Click" Grid.Row="2" Grid.Column="2" />
                 <Button Click="showClient" Content="Zarzadaj:Klienci" Margin="0,10"> </Button>
                 <Button Click="showTransportOrder_Click" Content="Zamów transport" ></Button>
+                <Button Content="Wyślij transport" Click="showSendTransport_click" Margin="0,10"></Button>
             </StackPanel>
         </Border>
     </Grid>

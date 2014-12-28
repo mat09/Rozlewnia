@@ -13,20 +13,8 @@ C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Deb
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia WPF.g.resources
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia_WPF.Properties.Resources.resources
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia WPF.csproj.GenerateResource.Cache
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputUserDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\Rozlewnia WPF_MarkupCompile.lref
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputUserDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputClientDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputClientDialog.g.cs
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputBootleDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputBootleDialog.g.cs
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputTakeBootleDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputTakeBootleDialog.g.cs
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputTransporterDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\showClientDialog.baml
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\InputTransporterDialog.g.cs
-C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\showClientDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterManageDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterManageDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportOrderDialog.baml
@@ -38,3 +26,17 @@ C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Deb
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportSendDialog.baml
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleEditDialog.g.cs
 C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransportSendDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAttachDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientAdd_EditDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGetDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterAdd_EditDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientManageDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAttachDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientAdd_EditDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleGetDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\TransporterAdd_EditDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\UserAdd_EditDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\ClientManageDialog.g.cs
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\UserAdd_EditDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAddToSendDialog.baml
+C:\Users\Mateuszk\Documents\GitHub\Rozlewnia\Rozlewnia WPF\Rozlewnia WPF\obj\Debug\BootleAddToSendDialog.g.cs

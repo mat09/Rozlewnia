@@ -73,7 +73,7 @@ namespace Rozlewnia_WPF
         private void showClient(object sender, RoutedEventArgs e)
         {
             showClientDialog dialog = new showClientDialog();
-            dialog.Show();
+            dialog.ShowDialog();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -86,6 +86,16 @@ namespace Rozlewnia_WPF
         {
             TransportOrderDialog dialog = new TransportOrderDialog();
             dialog.ShowDialog();
+        }
+
+       
+        private void showSendTransport_click(object sender, RoutedEventArgs e)
+        {
+            TransportSendDialog dialog = new TransportSendDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("Transport wysłano.");
+            }
         }
     }
 }

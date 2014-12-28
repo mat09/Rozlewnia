@@ -19,11 +19,9 @@ namespace Rozlewnia_WPF
     /// </summary>
     public partial class TransportOrderDialog : Window
     {
-        static int rowAmmountBootle = 3;
         static int rowAmmountTransporter = 8;
         
         private Transporter trans;
-        private searchBootleClass bootle;
 
         private String name;
         private String phone;
@@ -50,7 +48,7 @@ namespace Rozlewnia_WPF
             dt2.CanUserDeleteRows = false;
             dt2.IsReadOnly = true;
             this.DataContext = this;
-            dt2.ItemsSource = DataBase.Instance.searchBootle(null,null,null, 1);
+            dt2.ItemsSource = DataBase.Instance.searchBootle(null,null,null, 1,-1);
             dt.ItemsSource = DataBase.Instance.showTransporter(NName, Phone);
         }
 
@@ -70,7 +68,6 @@ namespace Rozlewnia_WPF
         private void OrderTransport_Click(object sender, RoutedEventArgs e)
         {
             List<searchBootleClass> bootle = dt2.SelectedItems.OfType<searchBootleClass>().ToList();
-            
             trans = (Transporter)dt.SelectedItem;
             if (trans != null)
             {
@@ -78,7 +75,7 @@ namespace Rozlewnia_WPF
                 {
                     if (dt.SelectedCells.Count == rowAmmountTransporter)
                     {
-                        if (DataBase.Instance.changeTransport(bootle, trans.Id_transporter, 2, null))
+                        if (DataBase.Instance.changeTransport(bootle, trans.Id_transporter, 2, null,false))
                         {
                             this.DialogResult = true;
                             MessageBox.Show("Zamówiono transport.");

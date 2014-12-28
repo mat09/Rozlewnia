@@ -54,28 +54,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BootleAddToSendDialog.xaml.cs">
+      <DependentUpon>BootleAddToSendDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Classes.cs" />
     <Compile Include="BootleEditDialog.xaml.cs">
       <DependentUpon>BootleEditDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Filter.cs" />
-    <Compile Include="InputBootleDialog.xaml.cs">
-      <DependentUpon>InputBootleDialog.xaml</DependentUpon>
+    <Compile Include="BootleAttachDialog.xaml.cs">
+      <DependentUpon>BootleAttachDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputClientDialog.xaml.cs">
-      <DependentUpon>InputClientDialog.xaml</DependentUpon>
+    <Compile Include="ClientAdd_EditDialog.xaml.cs">
+      <DependentUpon>ClientAdd_EditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputTakeBootleDialog.xaml.cs">
-      <DependentUpon>InputTakeBootleDialog.xaml</DependentUpon>
+    <Compile Include="BootleGetDialog.xaml.cs">
+      <DependentUpon>BootleGetDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputTransporterDialog.xaml.cs">
-      <DependentUpon>InputTransporterDialog.xaml</DependentUpon>
+    <Compile Include="TransporterAdd_EditDialog.xaml.cs">
+      <DependentUpon>TransporterAdd_EditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputUserDialog.xaml.cs">
-      <DependentUpon>InputUserDialog.xaml</DependentUpon>
+    <Compile Include="UserAdd_EditDialog.xaml.cs">
+      <DependentUpon>UserAdd_EditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="showClientDialog.xaml.cs">
-      <DependentUpon>showClientDialog.xaml</DependentUpon>
+    <Compile Include="ClientManageDialog.xaml.cs">
+      <DependentUpon>ClientManageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="TransporterManageDialog.xaml.cs">
       <DependentUpon>TransporterManageDialog.xaml</DependentUpon>
@@ -90,31 +93,35 @@
     <Compile Include="StockmanStorageWindow.xaml.cs">
       <DependentUpon>StockmanStorageWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="BootleAddToSendDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BootleEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputBootleDialog.xaml">
+    <Page Include="BootleAttachDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputClientDialog.xaml">
+    <Page Include="ClientAdd_EditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputTakeBootleDialog.xaml">
+    <Page Include="BootleGetDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputTransporterDialog.xaml">
+    <Page Include="TransporterAdd_EditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputUserDialog.xaml">
+    <Page Include="UserAdd_EditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="showClientDialog.xaml">
+    <Page Include="ClientManageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

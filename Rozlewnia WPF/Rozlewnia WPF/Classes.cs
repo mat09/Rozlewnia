@@ -248,7 +248,47 @@ namespace Rozlewnia_WPF
 }
         
     }
+    class Transport
+    {
+        private String name;
+        public String NName
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
+        private String data_ordered;
+        public String Data_ordered
+        {
+            get
+            {
+                return data_ordered;
+            }
+            set
+            {
+                data_ordered = Data_ordered;
+            }
+        }
+
+        private String data_start;
+        private String data_end;
+
+        private String id_transport;
+        public String Id_transport
+{
+  get { return id_transport; }
+  set { id_transport = value; }
+}
+
+        private String phone_number;
+        public String Phone_number
+{
+  get { return phone_number; }
+  set { phone_number = value; }
+}
+
+        
+    }
 
     // nieprzydatne poki co :|
     //    Pattern::  Iterator

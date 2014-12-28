@@ -251,14 +251,32 @@ namespace Rozlewnia_WPF
             result.Close();
             return id;
         }
-        internal bool changeTransport(List<searchBootleClass> bootle, String id_transporter, int status, String id_trans)
+        
+        /* metoda sluzy do dodawani transportu(gdy user zamowi transpor)
+             *                  wtedy :
+             *                          doda nowy wiersz w tabeli transport
+             *                          zmieni status wszytskich butli jakie wybrano na 2
+             *                          wstawi wszystkie butle do tabeli IN_TRANS (powiarze butle z konkretnym transportem)
+             *                  aby dodac transport trzeba wpisac w wywolaniu id_trans=null bo wpis transport dopiero powstanie na podstawie wybranego transportera
+         *              lub do edycji trasnpostu ( gdy user np kliknie wyslij transport)
+             *                  wtedy:
+             *                          doda do transportu data_start
+             *                          zmieni status butli powiazanych z transportem na 3
+             *                  aby ja wywolac trzeba wpiszac w wywolaniu id_trasnporter=null bo nie interesuje nas transporter tylko transport
+         *              lub do dodawania butli czekajacych na transport do transportu
+             *                  wtedy:
+             *                          zmienia status butli na 2
+             *                          dodaje bulte do in_tran
+             *                  aby ja wywolac trzeba ustawic w wywolaniu add_bootle=true
+         */
+        internal bool changeTransport(List<searchBootleClass> bootle, String id_transporter, int status, String id_trans,bool add_bootle)
         {
 
-            if (id_trans == null)//dodawanie nowego transportu
+            if ( id_trans == null && id_transporter!=null && add_bootle==false )//dodawanie nowego transportu
             {
                 MySqlTransaction transaction = null;
                 MySqlCommand cmd = null;
-                int id=10;
+                int id=new int();
 
                 try
                 {
@@ -267,9 +285,9 @@ namespace Rozlewnia_WPF
                     cmd = new MySqlCommand();
                     cmd.Connection = sqlCon;
                     cmd.Transaction = transaction;
-                    
-                    
-                    cmd.CommandText="INSERT INTO TRANSPORT VALUES (null,"+id_transporter+",1,now(),null,null)";
+
+
+                    cmd.CommandText = "INSERT INTO TRANSPORT VALUES (null," + id_transporter + ",1,null,null,now())";
                     cmd.ExecuteNonQuery();
                    
 
@@ -278,7 +296,6 @@ namespace Rozlewnia_WPF
                     if (result.Read())
                         id = result.GetInt16(0);
                     result.Close();
-                    System.Windows.MessageBox.Show(id + " - id");
                     foreach (searchBootleClass bo in bootle)
                     {
                         cmd.CommandText = "UPDATE BOOTLE SET status=2 WHERE ID="+bo.ID;
@@ -305,21 +322,105 @@ namespace Rozlewnia_WPF
                     return false;
                 }
             }
+            if( id_trans != null && id_transporter==null && add_bootle==false)  // wysylanie transportu
+            {
+                MySqlTransaction transaction = null;
+                MySqlCommand cmd = null;
+                System.Windows.MessageBox.Show("asd wchodzi count:"+bootle.Count);
+                try
+                {
+                    transaction = sqlCon.BeginTransaction();
+                    cmd = new MySqlCommand();
+                    cmd.Connection = sqlCon;
+                    cmd.Transaction = transaction;
 
 
+                    cmd.CommandText = "UPDATE TRANSPORT SET data_start=now() WHERE id_trans=" + id_trans;
+                    cmd.ExecuteNonQuery();
+                    foreach (searchBootleClass bo in bootle)
+                    {
+                        cmd.CommandText = "UPDATE BOOTLE SET status=3 WHERE ID=" + bo.ID;
+                        cmd.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+
+                    }
+                    catch (MySqlException ex1)
+                    {
+                        System.Windows.MessageBox.Show("Error1: " + ex1.ToString());
+                    }
+
+                    System.Windows.MessageBox.Show("Error2: " + ex.ToString());
+                    return false;
+                }
+            }
+            if (id_trans != null && id_transporter == null && add_bootle == true) // dodawnanie butli do zamowionego transportu
+            {
+                MySqlTransaction transaction = null;
+                MySqlCommand cmd = null;
+                
+                try
+                {
+                    transaction = sqlCon.BeginTransaction();
+                    cmd = new MySqlCommand();
+                    cmd.Connection = sqlCon;
+                    cmd.Transaction = transaction;
+
+                    foreach (searchBootleClass bo in bootle)
+                    {
+                        cmd.CommandText = "UPDATE BOOTLE SET status=2 WHERE ID=" + bo.ID;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "INSERT INTO IN_TRANS VALUES(" + bo.ID + "," + id_trans + ")";
+                        cmd.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+
+                    }
+                    catch (MySqlException ex1)
+                    {
+                        System.Windows.MessageBox.Show("Error1: " + ex1.ToString());
+                    }
+
+                    System.Windows.MessageBox.Show("Error2: " + ex.ToString());
+                    return false;
+                }
+            }
             return false;
         }
 
 
-        internal List<searchBootleClass> searchBootle(String name, String surname, String ID,int status)
+        internal List<searchBootleClass> searchBootle(String name, String surname, String ID,int status,int id_trans)
         {
             List <searchBootleClass> list = new List<searchBootleClass>();
-            String query = "SELECT ID , name ,surname FROM BOOTLE, CLIENT WHERE client.id_client = bootle.id_client ";
-            if (name!="" && name!=null) query += " AND client.name='" + name+"'";
-            if (surname != "" && surname!=null) query += " AND client.surname='" + surname + "'";
-            if (ID != "" && ID!=null) query += " AND bootle.ID=" + ID;
-            if (status!=-1) query+= " AND bootle.status=" + status;
+            String query=null;
+            if (id_trans == -1) 
+            {
+                query = "SELECT ID , name ,surname FROM BOOTLE, CLIENT WHERE client.id_client = bootle.id_client ";
+                if (name != "" && name != null) query += " AND client.name='" + name + "'";
+                if (surname != "" && surname != null) query += " AND client.surname='" + surname + "'";
+                if (ID != "" && ID != null) query += " AND bootle.ID=" + ID;
+                if (status != -1) query += " AND bootle.status=" + status;
+            }
+            else
+            {
+                query="SELECT DISTINCT BOOTLE.ID ,CLIENT.name,CLIENT.surname FROM BOOTLE,CLIENT,TRANSPORT,IN_TRANS WHERE BOOTLE.ID=IN_TRANS.ID AND IN_TRANS.id_trans ="+id_trans+" and BOOTLE.id_client=CLIENT.id_client";
+            }
 
+            
             System.Windows.MessageBox.Show(query);
             
             MySqlCommand cmd = new MySqlCommand(query, sqlCon);
@@ -411,6 +512,27 @@ namespace Rozlewnia_WPF
             return list;
 
         }
-        
+        internal List<Transport> showTransport(int type)
+        {
+            List<Transport> list = new List<Transport>();
+            String query = "SELECT transport.id_trans ,transporter.name,contact.phone_number,transport.data_ordered FROM TRANSPORT,TRANSPORTER,CONTACT WHERE TRANSPORT.id_transporter=TRANSPORTER.id_transporter AND data_start is null AND contact.id_contact=transporter.id_contact AND transport.type=" + type;
+            
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader result = cmd.ExecuteReader();
+            while (result.Read())
+            {
+
+                list.Add(new Transport()
+                {
+                    Id_transport = result.GetString(0),
+                    NName = result.GetString(1),
+                    Phone_number = result.GetString(2),
+                    Data_ordered= result.GetString(3)
+                }
+                );
+            }
+            result.Close();
+            return list;
+        }
     }
 }
