@@ -1,16 +1,12 @@
-CREATE TABLE SESSION (id_session int(6) NOT NULL auto_increment , id_user int(6), login datetime, logout datetime, error int(1) DEFAULT 0, PRIMARY KEY (id_session)  , UNIQUE (id_session) , FOREIGN KEY id_user_fk(id_user) REFERENCES USERS(id_user) ) ENGINE = INNODB;
-
-CREATE TABLE USERS  ( id_user int(6) NOT NULL auto_increment , who int(1) , login varchar(15) NOT NULL, password varchar(32) NOT NULL,  , name varchar(15) NOT NULL, surname varchar(32) NOT NULL, PRIMARY KEY (id_user) , UNIQUE (id_user) ) ENGINE=INNODB ;
-CREATE TABLE BOOTLE ( ID int(6) NOT NULL, id_client int(6) DEFAULT NULL , status int(1) DEFAULT NULL , PRIMARY KEY (ID) , UNIQUE (ID) , FOREIGN KEY (id_client) REFERENCES CLIENT(id_client) ON DELETE CASCADE ) ENGINE = INNODB;
-CREATE TABLE CLIENT ( id_client int(6) NOT NULL auto_increment , id_contact int(6), name varchar(15) NOT NULL, surname varchar(32) NOT NULL ,FOREIGN KEY (id_contact) REFERENCES CONTACT ( id_contact) ON DELETE SET NULL , PRIMARY KEY (id_client) , UNIQUE (id_contact) ) ENGINE = INNODB ; 
+CREATE TABLE USERS  ( id_user int(6) NOT NULL auto_increment , who int(1) , login varchar(15) NOT NULL, password varchar(32) NOT NULL,  name varchar(15) NOT NULL, surname varchar(32) NOT NULL, PRIMARY KEY (id_user) , UNIQUE (id_user) ) ENGINE=INNODB ;
 CREATE TABLE CONTACT ( id_contact int(6) NOT NULL auto_increment ,city varchar(32) NOT NULL, state varchar(32) NOT NULL,house_number varchar(5) NOT NULL , flat_number varchar(5) , post_code varchar(6) NOT NULL, phone_number varchar(9) NOT NULL ,PRIMARY KEY (id_contact), UNIQUE (id_contact) ) ENGINE = INNODB ;
-CREATE TABLE TRANSORTER ( id_transporter int(6) NOT NULL auto_increment , name varchar(32) NOT NULL , id_contact int(6) NOT NULL, PRIMARY KEY (id_transorter) , UNIQUE (id_transporter) , FOREIGN KEY id_contact REFERENCES CONTACT ( id_contact ) ON DELETE SET NULL ) ENGINE=INNODB;
-CREATE TABLE TRANSPORT (id_tran int(6) NOT NULL auto_increment , id_transporter int(6) NOT NULL ,type int(1) NOT NULL , data_start date DEFAULT NULL, data_end date DEFAULT NULL, PRIMARY KEY (id_trans) , UNIQUE (id_trans) , FOREIGN KEY id_transporter REFERENCES TRANSPORTER(id_transporter) ) ENGINE = INNNODB;
-
-
-
-
+CREATE TABLE CLIENT ( id_client int(6) NOT NULL auto_increment , id_contact int(6), name varchar(15) NOT NULL, surname varchar(32) NOT NULL ,FOREIGN KEY (id_contact) REFERENCES CONTACT ( id_contact) ON DELETE SET NULL , PRIMARY KEY (id_client) , UNIQUE (id_contact) ) ENGINE = INNODB ; 
+CREATE TABLE SESSION (id_session int(6) NOT NULL auto_increment , id_user int(6), login datetime, logout datetime, error int(1) DEFAULT 0, PRIMARY KEY (id_session), UNIQUE (id_session) , FOREIGN KEY id_user_fk(id_user) REFERENCES USERS(id_user) ) ENGINE = INNODB;
+CREATE TABLE BOOTLE ( ID int(6) NOT NULL, id_client int(6) DEFAULT NULL , status int(1) DEFAULT NULL , PRIMARY KEY (ID) , UNIQUE (ID) , FOREIGN KEY (id_client) REFERENCES CLIENT(id_client) ON DELETE CASCADE ) ENGINE = INNODB;
+CREATE TABLE TRANSPORTER ( id_transporter int(6) NOT NULL auto_increment , name varchar(32) NOT NULL , id_contact int(6) NOT NULL, PRIMARY KEY (id_transporter) , UNIQUE (id_transporter) , FOREIGN KEY fk_id_contact(id_contact) REFERENCES CONTACT(id_contact) ) ENGINE=INNODB;
+CREATE TABLE TRANSPORT (id_trans int(6) NOT NULL auto_increment , id_transporter int(6) NOT NULL ,type int(1) NOT NULL , data_start date DEFAULT NULL, data_end date DEFAULT NULL, PRIMARY KEY (id_trans) , UNIQUE (id_trans) , FOREIGN KEY fk_id_transporter(id_transporter) REFERENCES TRANSPORTER( id_transporter ) )ENGINE = INNODB;
 CREATE TABLE IN_TRANS( ID int(6) NOT NULL , id_trans int(6) NOT NULL , PRIMARY KEY (ID,id_trans) , FOREIGN KEY (ID) REFERENCES BOOTLE(ID), FOREIGN KEY (id_trans) REFERENCES TRANSPORT(id_trans)) ENGINE = INNODB ;
+
 
 
 ====   PROCEDURY ==============
@@ -23,6 +19,7 @@ BEGIN
 DECLARE zm INT;
 	INSERT INTO BOOTLE VALUES(ID,id_client,0);
 END
+
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client`(
 						IN Nid_client int(6),
@@ -76,6 +73,9 @@ start transaction;
     SELECT id;
 END
 
+
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteBootle`(IN DID int(6))
 BEGIN
 DECLARE zm INT;
@@ -92,6 +92,7 @@ ELSE ROLLBACK;
 end if;
 SELECT zm,zm2;
 END
+
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `statusBootle`(	
                                     IN NID int(6),
@@ -120,6 +121,8 @@ end if;
 SELECT zm,zm2;
 END
 
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `transporter`(
 						IN Nid_transporter int(6),
 						IN Nname varchar(128),
@@ -139,8 +142,7 @@ start transaction;
     end if;
 	IF Nid_transporter is NULL THEN 
 		INSERT INTO CONTACT VALUES (null,Ncity,Nstreet,NHouse_number,Nflat_number,Npost_code,Nphone_number);
-        SET id = last_insert_id();
-		INSERT INTO TRANSPORTER VALUES (null,Nname,id);
+        INSERT INTO TRANSPORTER VALUES (null,Nname,id);
         SET id = last_insert_id();
 	else 
 		SET zm1=(SELECT COUNT(*) FROM transporter WHERE id_transporter = Nid_transporter);
@@ -170,6 +172,9 @@ start transaction;
     SELECT id;
 END
 
+
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `user`(IN Nid_user int(6),
 						IN Nwho int(1),
 						IN Nlogin varchar(15),
@@ -195,6 +200,7 @@ start transaction;
     end if;
 COMMIT;
 end
+
 
 ================================
 
